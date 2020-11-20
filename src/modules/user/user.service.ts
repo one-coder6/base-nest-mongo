@@ -35,7 +35,7 @@ export class UserService {
       throw new ApiException(
         '修改失败，没有找到这条记录',
         ApiErrorCode.NOT_EMPTY,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.OK,
       );
     }
   }
@@ -55,7 +55,7 @@ export class UserService {
       throw new ApiException(
         '删除失败，没有找到这条记录',
         ApiErrorCode.NOT_EMPTY,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.OK,
       );
     }
   }
@@ -74,7 +74,7 @@ export class UserService {
       throw new ApiException(
         `批量删除失败:[${err.message}]`,
         ApiErrorCode.NOT_EMPTY,
-        HttpStatus.BAD_REQUEST,
+        HttpStatus.OK,
       );
     }
   }

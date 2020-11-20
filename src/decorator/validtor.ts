@@ -24,8 +24,6 @@ function validateHandler(
   };
 }
 
-
-
 // 处理时间格式
 export function IsLocalDate(
   property: string,

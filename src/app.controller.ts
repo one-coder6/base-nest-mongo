@@ -17,7 +17,7 @@ export class AppController {
   @NoToken()
   @Get('testRes')
   getTest(@Res() res): string {
-    return res.status(200).send(['asdas']);
+    return res.status(200).send(['testRes']);
   }
 
   @ApiHeader({

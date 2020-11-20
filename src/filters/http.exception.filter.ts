@@ -25,7 +25,7 @@ export class HttpExceptionFilter<T> implements ExceptionFilter {
       ret.resultCode = ApiErrorCode.FAIL;
       ret.resultMsg = exception.message;
     }
-    console.log(`code:${ret.resultCode},contenx:${ret.resultMsg}`);
+    console.log(`[code:${ret.resultCode},contenx:${ret.resultMsg}]`);
     response.send(ret);
   }
 }
