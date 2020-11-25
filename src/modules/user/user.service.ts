@@ -13,18 +13,46 @@ export class UserService {
     private readonly userModel: Model<User>,
   ) {}
 
-  async queryUserList() {
-    return await this.userModel.find().exec();
+  /**
+   * 分页查询
+   */
+  async queryUserList(param) {
+    const { pageSize = 10, pageIndex, keyword = '' } = param;
+    const _pageSize = parseInt(pageSize),
+      _pageIndex = parseInt(pageIndex);
+    const sort = { createTime: -1 }; // 排序
+    const query = keyword ? { title: { $regex: keyword } } : {};
+    const totalCount = await this.userModel.countDocuments(query);
+    const pageData = await this.userModel
+      .find(query)
+      .skip(_pageSize * ((_pageIndex || 1) - 1))
+      .limit(_pageSize)
+      .sort(sort);
+    return {
+      totalCount,
+      pageData,
+    };
   }
+
+  /**
+   * 精确查询
+   */
   async queryUserById(id: string) {
     const ret = await this.userModel.findOne({ _id: id }).exec();
     return ret;
   }
+
+  /**
+   * 新增
+   */
   async create(userDto: UserDto) {
     const createUser = this.userModel(userDto);
     return createUser.save();
   }
 
+  /**
+   * 修改
+   */
   async update(user) {
     const thisOne = await this.userModel.findOne({ _id: user.id });
     if (thisOne) {
@@ -43,7 +71,6 @@ export class UserService {
   /**
    * 根据id物理删除记录（支持单条删除或者批量删除）
    * @param id 记录的id，例如："5f8d60b51e504746dc132450"
-   *
    */
   async delete(id: string) {
     const thisOne = await this.userModel.findOne({ _id: id });

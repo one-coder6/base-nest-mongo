@@ -67,10 +67,10 @@ export class UserController {
     example: '546f9a99651c4d13b126f353048766b8',
   })
   @Get('queryUserList')
-  queryUserList() {
-    return this.userService.queryUserList();
+  queryUserList(@Body() param) {
+    return this.userService.queryUserList(param);
   }
-  
+
   // 根据id查询一个user
   @ApiHeader({
     name: 'access-token',
