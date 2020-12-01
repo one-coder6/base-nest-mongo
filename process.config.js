@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'nest-little',
+      name: 'nest-base-mongo',
       script: 'dist/main.js',
       env: {
         NODE_ENV: 'development',
