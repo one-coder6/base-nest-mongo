@@ -7,7 +7,6 @@ import { UserModule } from './modules/user/user.module';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { MongooseConfigService } from './config/mongoose.service';
-import { TestModule } from './modules/test/test.module';
 
 const options = {
   imports: [ConfigModule],
@@ -15,7 +14,7 @@ const options = {
   useClass: MongooseConfigService,
 };
 @Module({
-  imports: [MongooseModule.forRootAsync(options), UserModule, TestModule],
+  imports: [MongooseModule.forRootAsync(options), UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
